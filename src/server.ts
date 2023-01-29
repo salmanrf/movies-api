@@ -1,7 +1,3 @@
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
 import express from "express";
 import { NextFunction, Request, Response } from "express";
 import { DataSource } from "typeorm";
@@ -58,6 +54,9 @@ export class Server {
       })
       .catch((error) => {
         console.error("Unable to connect to the database. ", error);
+        setTimeout(() => {
+          this.start();
+        }, 1000);
       });
   }
 }

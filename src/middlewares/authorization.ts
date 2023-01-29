@@ -13,7 +13,7 @@ export async function AuthorizeAdmin(req: Request, res: Response, next: NextFunc
 
     const token = authorization.split(" ").pop();
 
-    const [decoded, error] = await promiseTuplify(JwtVerify(token, "levitation"));
+    const [decoded, error] = await promiseTuplify(JwtVerify(token, process.env.ADMIN_JWT_SECRET));
 
     if (error) {
       throw new AppError("Invalid token.", 401);
@@ -37,7 +37,7 @@ export async function AuthorizeUser(req: Request, res: Response, next: NextFunct
 
     const token = authorization.split(" ").pop();
 
-    const [decoded, error] = await promiseTuplify(JwtVerify(token, "silversoul"));
+    const [decoded, error] = await promiseTuplify(JwtVerify(token, process.env.USER_JWT_SECRET));
 
     if (error) {
       throw new AppError("Invalid token.", 401);

@@ -60,7 +60,7 @@ export class AdminService {
           email: admin.email,
           name: admin.name,
         },
-        "levitation"
+        process.env.ADMIN_JWT_SECRET
       );
 
       return token;

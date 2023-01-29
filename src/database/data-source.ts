@@ -5,10 +5,11 @@ export let AppDataSource: DataSource;
 export function initDataSource() {
   AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
-    password: "wildflower123",
-    database: "movies",
-    port: 5435,
+    host: process.env.DB_HOST,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    port: +process.env.DB_PORT,
     entities: ["dist/models/entities/**/*.js"],
     synchronize: true,
     logging: true,

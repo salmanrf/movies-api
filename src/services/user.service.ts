@@ -61,7 +61,7 @@ export class UserService {
           email: user.email,
           name: user.name,
         },
-        "silversoul"
+        process.env.USER_JWT_SECRET
       );
 
       return token;
