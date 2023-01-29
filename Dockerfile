@@ -1,7 +1,9 @@
 FROM node:lts-alpine3.16
 
-WORKDIR /app
+WORKDIR /home/app
 
-COPY . /app
+COPY . .
+
+RUN yarn add -D typescript
 
 CMD ["yarn"]
