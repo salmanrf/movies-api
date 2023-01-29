@@ -3,15 +3,16 @@ import { request } from "http";
 import { AdminLoginSchema } from "../dtos/admin-login.dto";
 import { CreateAdminSchema } from "../dtos/create-admin.dto";
 import { Validate } from "../dtos/validate";
-import { AdminService } from "../services/admin.service";
+import { AuthorizeUser } from "../middlewares/authorization";
+import { UserService } from "../services/user.service";
 
-export class AdminController {
+export class UserController {
   private router: Router;
-  private adminService: AdminService;
+  private userService: UserService;
 
   constructor() {
     this.router = Router();
-    this.adminService = new AdminService();
+    this.userService = new UserService();
 
     this.setupRoutes();
   }
@@ -22,14 +23,26 @@ export class AdminController {
 
   private setupRoutes() {
     this.router.post("/login", Validate(AdminLoginSchema), this.login);
-    this.router.post("/", Validate(CreateAdminSchema), this.create);
+    this.router.post("/register", Validate(CreateAdminSchema), this.register);
+    this.router.get("/self", AuthorizeUser, this.getSelf);
   }
 
-  private create = async (req: Request, res: Response, next: NextFunction) => {
+  private getSelf = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      return res.status(201).json({
+        status: true,
+        data: req["decoded"],
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private register = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { body } = req;
 
-      const result = await this.adminService.create(body);
+      const result = await this.userService.register(body);
 
       return res.status(201).json({
         status: true,
@@ -44,7 +57,7 @@ export class AdminController {
     try {
       const { body } = req;
 
-      const result = await this.adminService.login(body);
+      const result = await this.userService.login(body);
 
       res.cookie("access_token", result, {
         httpOnly: true,
