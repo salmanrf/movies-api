@@ -1,4 +1,9 @@
-import express, { NextFunction, Request, Response } from "express";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
+import express from "express";
+import { NextFunction, Request, Response } from "express";
 import { DataSource } from "typeorm";
 import { AppError } from "./common/utils/custom-error";
 import { AdminController } from "./controllers/admin.controller";
