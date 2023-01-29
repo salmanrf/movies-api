@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "8795d9ac-8125-4713-bdca-028ab431f80b",
+		"name": "Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"salmanrf2@capybara.com\",\r\n    \"name\": \"salmanrf\",\r\n    \"password\": \"wildflower123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/admins",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"salmanrf2@capybara.com\",\r\n    \"password\": \"wildflower123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/admins/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"victoria@beachhouse.com\",\r\n    \"name\": \"Victoria Legrand\",\r\n    \"password\": \"wildflower123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"victoria@beachhouse.com\",\r\n    \"password\": \"wildflower123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Self",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImVtYWlsIjoidmljdG9yaWFAYmVhY2hob3VzZS5jb20iLCJuYW1lIjoiVmljdG9yaWEgTGVncmFuZCIsImlhdCI6MTY3NDk3ODU4MywiZXhwIjoxNjc1MDY0OTgzfQ.qoLA2EYhfYZ7z-q_9cakQyiiKgrrN10D2-aDRClmcQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/self",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"self"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Create Genre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6InNhbG1hbnJmMkBjYXB5YmFyYS5jb20iLCJuYW1lIjoic2FsbWFucmYiLCJpYXQiOjE2NzQ5NzAyNzgsImV4cCI6MTY3NTA1NjY3OH0.zqLvjASyF92eXSq4s5r1I9Mw5hUl9H6fYApIEQRY5q0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Crime\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/movies/genres",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Artist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/movies/artists",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Godfather\",\r\n    \"description\": \"The Godfather\",\r\n    \"duration\": 180,\r\n    \"watch_url\": \"https://www.imdb.com/title/tt0086250/\",\r\n    \"genres\": [4],\r\n    \"artists\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/movies",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"genres\": [2, 4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/movies/807344f7-1fca-4021-b33e-3fce186c6b08/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"807344f7-1fca-4021-b33e-3fce186c6b08",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/movies",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/movies/807344f7-1fca-4021-b33e-3fce186c6b08",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"807344f7-1fca-4021-b33e-3fce186c6b08"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Genres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/movies/genres",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Artists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/movies/artists?",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"artists"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vote Movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJkMDc1MDQxNi0wYmU0LTRjZDktYjVlNS1mNDgyMGEyMGU0YTMiLCJlbWFpbCI6InZpY3RvcmlhQGJlYWNoaG91c2UuY29tIiwibmFtZSI6IlZpY3RvcmlhIExlZ3JhbmQiLCJpYXQiOjE2NzQ5Nzk4MjQsImV4cCI6MTY3NTA2NjIyNH0.X7_e2hwazyHAqvQstta-H-SR8XmgHy6UxLflOf89AAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/movies/807344f7-1fca-4021-b33e-3fce186c6b08/vote",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"807344f7-1fca-4021-b33e-3fce186c6b08",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}
