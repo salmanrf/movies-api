@@ -1,6 +1,6 @@
 ## Description
 
-Salman Rizqi Fatih - Roketin NodeJS Engineer Test Case Submission
+Movies API
 
 ## Run with Docker
 
