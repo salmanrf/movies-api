@@ -94,4 +94,81 @@ describe("Movie Service", () => {
       expect(() => movieService.createArtist({ name: null } as any)).rejects.toThrow();
     });
   });
+
+  describe("Vote Movie", () => {
+    beforeAll(() => {
+      const userMock = {
+        user_id: "890",
+        email: "salmanrf2@gmail.com",
+        password: "Salman RF",
+        created_at: new Date(),
+        updated_at: null,
+        movie_votes: [],
+      };
+
+      const movieMock = {
+        movie_id: "456",
+        vote_count: 0,
+        title: "Goodfellas (1990)",
+        duration: 146,
+        created_at: new Date(),
+        updated_at: null,
+      };
+
+      // ? Mock manager findOne for User
+      jest.spyOn(dataSourceMock.AppDataSource.manager, "findOne").mockResolvedValue(userMock);
+
+      movieService = new MovieService();
+
+      (movieService as any)["movieRepo"] = {
+        findOne: jest.fn(),
+      };
+      (movieService as any)["movieVoteRepo"] = {
+        delete: jest.fn().mockResolvedValue(null),
+        findOne: jest.fn(),
+        save: jest.fn(),
+      };
+
+      jest.spyOn(movieService["movieRepo"], "findOne").mockResolvedValue(movieMock as any);
+      jest.spyOn(movieService["movieVoteRepo"], "findOne").mockResolvedValue(null);
+      jest
+        .spyOn(movieService["movieVoteRepo"], "save")
+        .mockImplementation((entity) => Promise.resolve({ ...entity }) as any);
+    });
+
+    test("Should successfully create new movie vote", async () => {
+      const userId = "890";
+      const movieId = "456";
+      const movieVote = await movieService.voteMovie(userId, movieId);
+
+      expect(movieVote.user_id).toBe(userId);
+      expect(movieVote.movie_id).toBe(movieId);
+    });
+
+    test("Should fail if user or movie is not found", async () => {
+      (dataSourceMock.AppDataSource.manager.findOne as any).mockResolvedValueOnce(null);
+
+      expect(() => movieService.voteMovie("111", "456")).rejects.toThrow();
+    });
+
+    test("Should fail if movie is not found", async () => {
+      (movieService["movieRepo"].findOne as any).mockResolvedValueOnce(null);
+
+      expect(() => movieService.voteMovie("111", "456")).rejects.toThrow();
+    });
+
+    test("Should delete existing vote if user has already voted", async () => {
+      const movieVoteMock = {
+        user_id: "asd",
+        movie_id: "dsa",
+      };
+
+      (movieService["movieVoteRepo"].findOne as any).mockResolvedValueOnce(movieVoteMock);
+
+      const res = await movieService.voteMovie(movieVoteMock.user_id, movieVoteMock.movie_id);
+
+      expect(movieService["movieVoteRepo"].delete).toHaveBeenCalled();
+      expect(res).toBe(movieVoteMock);
+    });
+  });
 });
