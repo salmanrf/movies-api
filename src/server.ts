@@ -29,6 +29,9 @@ export class Server {
   }
 
   public setupRoutes() {
+    this.app.use("/health", (req, res, next) => {
+      return res.json({ message: "I am healthy" });
+    });
     this.app.use("/api/admins", this.adminController.getRouter());
     this.app.use("/api/users", this.userController.getRouter());
     this.app.use("/api/movies", this.movieController.getRouter());
@@ -38,6 +41,10 @@ export class Server {
         message: err.message,
       });
     });
+  }
+
+  public getApp() {
+    return this.app;
   }
 
   public start() {
