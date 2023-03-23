@@ -315,16 +315,47 @@ describe("Movie Service", () => {
         expect(() => movieService.updateMovie("321", movieMock)).rejects.toThrow(/not found/i);
       });
 
-      // test("Should delete and update artists if provided", async () => {
-      //   const movieDto = {
-      //     ...movieMock,
-      //     artists: [8, 9],
-      //   };
+      test("Should delete and update artists if provided", async () => {
+        // @ts-ignore
+        jest
+          // @ts-ignore
+          .spyOn(movieService, "updateMovieArtists")
+          // @ts-ignore
+          .mockImplementationOnce((movie_id: string, artists: number[], __) =>
+            artists.map((artist_id) => ({ movie_id, artist_id }))
+          );
 
-      //   const res = await movieService.updateMovie("456", movieDto);
+        const movieDto = {
+          ...movieMock,
+          artists: [8, 9],
+        };
 
-      //   expect(dataSourceMock.AppDataSource.createQueryRunner)
-      // });
+        const res = await movieService.updateMovie("456", movieDto);
+
+        expect(res.movie_artists.map(({ artist_id }) => artist_id)).toStrictEqual(movieDto.artists);
+        expect(movieService["updateMovieArtists"]).toHaveBeenCalled();
+      });
+
+      test("Should delete and update genres if provided", async () => {
+        // @ts-ignore
+        jest
+          // @ts-ignore
+          .spyOn(movieService, "updateMovieGenres")
+          // @ts-ignore
+          .mockImplementationOnce((movie_id: string, genres: number[], __) =>
+            genres.map((genre_id) => ({ movie_id, genre_id }))
+          );
+
+        const movieDto = {
+          ...movieMock,
+          genres: [8, 9],
+        };
+
+        const res = await movieService.updateMovie("456", movieDto);
+
+        expect(res.movie_genres.map(({ genre_id }) => genre_id)).toStrictEqual(movieDto.genres);
+        expect(movieService["updateMovieGenres"]).toHaveBeenCalled();
+      });
     });
   });
 });
